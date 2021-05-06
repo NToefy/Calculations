@@ -5,12 +5,24 @@ using Xunit;
 
 namespace Calculations2.Tests
 {
-    public class UnitTest1
+    public class CalculatorFixture
     {
+        public Calculator Calc => new Calculator();
+    }
+    public class UnitTest1 : IClassFixture<CalculatorFixture> // Use fixture to eliminate need to recreate objects all the time
+    {
+        private readonly CalculatorFixture _calculatorFixture;
+
+        public UnitTest1(CalculatorFixture calculatorFixture)
+        {
+            _calculatorFixture = calculatorFixture;
+        }
+
         [Fact]
         public void Add_GivenTwoIntValues_ReturnsInt()
         {
-            var calc = new Calculator();
+            //var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             var result = calc.Add(1,2);
             Assert.Equal(3, result);
         }
@@ -18,37 +30,41 @@ namespace Calculations2.Tests
         [Fact]
         public void AddDouble_GivenTwoDoubleValues_ReturnsDouble()
         {
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             var result = calc.AddDouble(1.2, 3.5);
             Assert.Equal(4.7, result);
         }
 
         [Fact]
+        [Trait("Category", "FiboTests")]
         public void FiboDoesNotIncludeZero()
         {
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             Assert.All(calc.FiboNumbers, n => Assert.NotEqual(0, n));
         }
 
         [Fact]
+        [Trait("Category", "FiboTests")]
         public void FiboIncludes()
         {
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             Assert.Contains(13, calc.FiboNumbers);
         }
 
         [Fact]
+        [Trait("Category", "FiboTests")]
         public void FiboNotInclude4()
         {
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             Assert.DoesNotContain(4, calc.FiboNumbers);
         }
 
         [Fact]
+        [Trait("Category", "FiboTests")]
         public void CheckFiboCollection()
         {
             var expectedCollection = new List<int> { 1, 1, 2, 3, 5, 8, 13 };
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             Assert.Equal(expectedCollection, calc.FiboNumbers);
         }
     }
