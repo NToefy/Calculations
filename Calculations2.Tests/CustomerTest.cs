@@ -32,5 +32,13 @@ namespace Calculations2.Tests
             var exceptionDetails = Assert.Throws<ArgumentException>(() => customer.GetOrdersByName(null));
             Assert.Equal("Hello Bad Mistake", exceptionDetails.Message);
         }
+
+        [Fact]
+
+        public void LoyalCustomersForOrdersGreaterThan100()
+        {
+            var customer = CustomerFactory.CreateCustomerInstance(102);
+            Assert.IsType<LoyalCustomer>(customer);
+        }
     }
 }
