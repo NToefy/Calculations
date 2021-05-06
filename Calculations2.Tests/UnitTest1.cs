@@ -67,5 +67,24 @@ namespace Calculations2.Tests
             var calc = _calculatorFixture.Calc;
             Assert.Equal(expectedCollection, calc.FiboNumbers);
         }
+
+        [Fact]
+        public void IsOdd_GivenOddValue_ReturnsTrue()
+        {
+            var calc = _calculatorFixture.Calc;
+            var result = calc.IsOdd(3);
+            Assert.Equal(true, result);
+        }
+
+        [Theory]
+        [InlineData(1, true)]
+        [InlineData(2, false)]
+        [InlineData(3, true)]
+        public void IsOdd_TestOddAndEven(int value, bool expected)
+        {
+            var calc = _calculatorFixture.Calc;
+            var result = calc.IsOdd(value);
+            Assert.Equal(expected, result);
+        }
     }
 }
