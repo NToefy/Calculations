@@ -16,5 +16,20 @@ namespace Calculations2.Tests
                 yield return new object[] {6, false };
             }
         }
+
+        // This can be used to get data from database, web service ect.. esp for intergration tests
+        public static IEnumerable<object[]> IsOddOrEvenDataExternalData
+        {
+            get
+            {
+                var allLines = System.IO.File.ReadAllLines("IsOddOrEvenTestData.txt");
+                return allLines.Select(
+                    x =>
+                    {
+                        var lineSplit = x.Split(',');
+                        return new object[] { int.Parse(lineSplit[0]), bool.Parse(lineSplit[1]) };
+                    });
+            }
+        }
     }
 }

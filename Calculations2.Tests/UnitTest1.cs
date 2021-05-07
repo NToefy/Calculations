@@ -90,7 +90,7 @@ namespace Calculations2.Tests
         // sample with testdatashare
 
         [Theory]
-        [MemberData(nameof(TestDataShare.IsOddOrEvenData), MemberType = typeof(TestDataShare))]
+        [MemberData(nameof(TestDataShare.IsOddOrEvenDataExternalData), MemberType = typeof(TestDataShare))]
         public void IsOdd_TestOddAndEvenDataShare(int value, bool expected)
         {
             var calc = _calculatorFixture.Calc;
