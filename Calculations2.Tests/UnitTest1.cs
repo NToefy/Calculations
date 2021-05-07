@@ -86,5 +86,16 @@ namespace Calculations2.Tests
             var result = calc.IsOdd(value);
             Assert.Equal(expected, result);
         }
+
+        // sample with testdatashare
+
+        [Theory]
+        [MemberData(nameof(TestDataShare.IsOddOrEvenData), MemberType = typeof(TestDataShare))]
+        public void IsOdd_TestOddAndEvenDataShare(int value, bool expected)
+        {
+            var calc = _calculatorFixture.Calc;
+            var result = calc.IsOdd(value);
+            Assert.Equal(expected, result);
+        }
     }
 }
